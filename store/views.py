@@ -94,7 +94,7 @@ class CustomerViewSet(CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,Gener
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
-        return [IsAuthenticated]
+        return [IsAuthenticated()]
 
 
     @action(detail=False,methods=['GET','PUT'])
