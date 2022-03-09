@@ -11,7 +11,7 @@ from rest_framework import status
 from .models import OrderItem, Product , Collection, Review , Cart , CartItem , Customer
 from .filters import ProductFilter 
 from .pagination import DefaultPagination
-from .permissions import isAdminOrReadOnly ,FullDjangoModelPermissions
+from .permissions import isAdminOrReadOnly ,FullDjangoModelPermissions , ViewCustomerHistoryPermission
 from .serializers import ProductSerializer , CollectionSerializer , ReviewSerializer ,CartSerializer , AddCartItemSerializer , \
 CartItemSerializer , UpdateCartItemSerializer , CustomerSerializer
 
@@ -98,6 +98,9 @@ class CustomerViewSet(ModelViewSet):
             return [AllowAny()]
         return [IsAuthenticated()]
 
+    @action(detail=True,permission_classes=[ViewCustomerHistoryPermission])
+    def history(self,request,pk):
+        return Response('ok')
 
     @action(detail=False,methods=['GET','PUT'],permission_classes=[IsAuthenticated])
     def me(self,request):
@@ -110,6 +113,9 @@ class CustomerViewSet(ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
         return Response(serializer.data) 
+
+    
+
 
 
 
