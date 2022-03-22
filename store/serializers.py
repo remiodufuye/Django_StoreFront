@@ -124,6 +124,16 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order 
         fields = ['id','customer','placed_at','payment_status','items']
 
+    
+class CreateOrderSerializer(serializers.Serializer):
+    cart_id = serializers.UUIDfield()
+
+    def save(self,**kwargs):
+        print(self.validated['cart_id'])
+        print(self.context['user_id'])
+
+    pass 
+
 
 
 
