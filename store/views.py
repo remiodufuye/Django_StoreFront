@@ -13,7 +13,7 @@ from .filters import ProductFilter
 from .pagination import DefaultPagination
 from .permissions import isAdminOrReadOnly ,FullDjangoModelPermissions , ViewCustomerHistoryPermission
 from .serializers import ProductSerializer , CollectionSerializer , ReviewSerializer ,CartSerializer , AddCartItemSerializer , \
-CartItemSerializer , UpdateCartItemSerializer , CustomerSerializer,OrderSerializer ,CreateOrderSerializer
+CartItemSerializer , UpdateCartItemSerializer , CustomerSerializer,OrderSerializer ,CreateOrderSerializer,UpdateOrderSerializer
 
 
 
@@ -138,6 +138,8 @@ class OrderViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.request.method == 'POST':
             return CreateOrderSerializer
+        elif self.request.method == 'PATCH':
+            return UpdateOrderSerializer
         return OrderSerializer
 
 
